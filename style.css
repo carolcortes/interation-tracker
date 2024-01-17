@@ -1,0 +1,89 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 1rem 2rem;
+}
+
+.instructions_container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.user_container {
+  font-size: 1.1rem;
+}
+
+.user_container input {
+  height: 1.8rem;
+  text-indent: 0.5rem;
+}
+
+.example_phrase {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  user-select: none;
+  width: fit-content;
+}
+
+.example_phrase b,
+.type_container label {
+  text-decoration: underline;
+}
+
+.example_phrase p,
+label.first_phrase {
+  color: red;
+}
+
+.example_phrase.second_phrase p,
+label.second_phrase {
+  color: blue;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.type_container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.textarea {
+  height: 3.2rem;
+  max-width: 50rem;
+  padding: 0.5rem 1rem;
+  resize: none;
+}
+
+.submit_button-container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.submit_button {
+  cursor: pointer;
+  padding: 0.3rem 4rem;
+  width: fit-content;
+}
+
+.type_button button {
+  cursor: pointer;
+  padding: 0rem 0.3rem;
+  width: fit-content;
+}

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interation Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="main">
+    <h1 class="title">Interation Tracker</h1>
+    <form class="form">
+      <div class="user_container">
+        <label for="user">Digite seu nome:</label>
+        <input minlength="3" required type="text" name="user" id="user"> 
+      </div>
+      <div class="instructions_container">
+        <h3>Instruções:</h3>
+        <p>Digite as frases abaixo na caixa de texto correspondente. Para cada frase, o processo pode ser iniciado e finalizado apenas uma vez.</p>
+        <p>Pressione o botão "Salvar" para salvar os dados.</p>
+      </div>
+      <!-- Primeira frase (5x) -->
+      <div class="example_phrase">
+        <p><b>Frase 01:</b> Esta é uma frase de exemplo que demonstra as particularidades da gramática e da acentuação utilizadas no português de Portugal.</p>
+      </div>
+      <div class="type_container">
+        <label class="first_phrase" for="first_phrase-1">Digite a frase 01:</label>
+        <textarea required disabled name="first_phrase-1" id="first_phrase-1" maxlength="150" class="textarea"></textarea>
+        <div class="type_button">
+          <button name="first_phrase" value="1" class="init_button" id="first_phrase-1_init" type="button">Iniciar</button>
+          <button name="first_phrase" value="1" class="end_button" id="first_phrase-1_end" disabled type="button">Finalizar</button>
+        </div>
+      </div>
+      <div class="type_container">
+        <label class="first_phrase" for="first_phrase-2">Digite a frase 01:</label>
+        <textarea required disabled name="first_phrase-2" id="first_phrase-2" maxlength="150" class="textarea"></textarea>
+        <div class="type_button">
+          <button name="first_phrase" value="2" class="init_button" id="first_phrase-2_init" type="button">Iniciar</button>
+          <button name="first_phrase" value="2" class="end_button" id="first_phrase-2_end" disabled type="button">Finalizar</button>
+        </div>
+      </div>
+      <div class="type_container">
+        <label class="first_phrase" for="first_phrase-3">Digite a frase 01:</label>
+        <textarea required disabled name="first_phrase-3" id="first_phrase-3" maxlength="150" class="textarea"></textarea>
+        <div class="type_button">
+          <button name="first_phrase" value="3" class="init_button" id="first_phrase-3_init" type="button">Iniciar</button>
+          <button name="first_phrase" value="3" class="end_button" id="first_phrase-3_end" disabled type="button">Finalizar</button>
+        </div>
+      </div>
+      <div class="type_container">
+        <label class="first_phrase" for="first_phrase-4">Digite a frase 01:</label>
+        <textarea required disabled name="first_phrase-4" id="first_phrase-4" maxlength="150" class="textarea"></textarea>
+        <div class="type_button">
+          <button name="first_phrase" value="4" class="init_button" id="first_phrase-4_init" type="button">Iniciar</button>
+          <button name="first_phrase" value="4" class="end_button" id="first_phrase-4_end" disabled type="button">Finalizar</button>
+        </div>
+      </div>
+      <div class="type_container">
+        <label class="first_phrase" for="first_phrase-5">Digite a frase 01:</label>
+        <textarea required disabled name="first_phrase-5" id="first_phrase-5" maxlength="150" class="textarea"></textarea>
+        <div class="type_button">
+          <button name="first_phrase" value="5" class="init_button" id="first_phrase-5_init" type="button">Iniciar</button>
+          <button name="first_phrase" value="5" class="end_button" id="first_phrase-5_end" disabled type="button">Finalizar</button>
+        </div>
+      </div>
+      <hr>
+      <!-- Segunda frase (2x) -->
+      <div class="example_phrase second_phrase">
+        <p><b>Frase 02:</b> No sereno pôr da noite, a poesia flui em fênix acentuada, envolvendo a aura como mágica.</p>
+      </div>
+      <div class="type_container">
+        <label class="second_phrase" for="second_phrase-1">Digite a frase 02:</label>
+        <textarea required disabled name="second_phrase-1" id="second_phrase-1" maxlength="150" class="textarea"></textarea>
+        <div class="type_button">
+          <button name="second_phrase" value="1" class="init_button" id="second_phrase-1_init" type="button">Iniciar</button>
+          <button name="second_phrase" value="1" class="end_button" id="second_phrase-1_end" disabled type="button">Finalizar</button>
+        </div>
+      </div>
+      <div class="type_container">
+        <label class="second_phrase" for="second_phrase-2">Digite a frase 02:</label>
+        <textarea required disabled name="second_phrase-2" id="second_phrase-2" maxlength="150" class="textarea"></textarea>
+        <div class="type_button">
+          <button name="second_phrase" value="2" class="init_button" id="second_phrase-2_init" type="button">Iniciar</button>
+          <button name="second_phrase" value="2" class="end_button" id="second_phrase-2_end" disabled type="button">Finalizar</button>
+        </div>
+      </div>
+      <hr>
+      <div class="submit_button-container">
+        <button class="submit_button" type="submit">Salvar</button>
+      </div>
+
+    </form>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
