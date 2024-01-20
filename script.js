@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', function () {
   const endButtons = document.querySelectorAll('.end_button');
 
   let keyData = {};
-  let isKeyCurrentlyPressed = false;
 
   const createJsonFile = (jsonContent, userId) => {
     const blob = new Blob([jsonContent], { type: 'application/json' });
@@ -36,36 +35,37 @@ document.addEventListener('DOMContentLoaded', function () {
   const handleKeyDown = (event) => {
     blockCopy(event);
     const { name } = event.target;
-    
+  
     const sequence = Object.keys(keyData[name].keys).length;
-    
-    if (!isKeyCurrentlyPressed) {
-      keyData[name].pressed.push(event.key);
-      keyData[name].keys[sequence] = { press: performance.now() };
+  
+    console.log('down', event);
+  
+    // Verificar se a tecla anterior não tem um release
+    const previousSequence = sequence - 1;
+    if (previousSequence >= 0 && !keyData[name].keys[previousSequence].release) {
+      keyData[name].keys[previousSequence].release = event.timeStamp;
     }
-
-    isKeyCurrentlyPressed = true;
+  
+    keyData[name].pressed.push(event.key);
+    keyData[name].keys[sequence] = { press: event.timeStamp, key: event.key };
   };
-
+  
   const handleKeyUp = (event) => {
     const { name } = event.target;
-
+  
     const sequence = Object.keys(keyData[name].keys).length - 1;
-
-    keyData[name].keys[sequence].release = performance.now();
-    isKeyCurrentlyPressed = false;
+  
+    console.log('up', event);
+  
+    keyData[name].keys[sequence].release = event.timeStamp;
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const userId = user.value.split(' ').join('_');
 
-    const disabledTextareas = Array.from(textareas).every(
-      (textarea) => textarea.disabled,
-    );
-    const emptyTextareas = Array.from(textareas).some(
-      (textarea) => textarea.value === '',
-    );
+    const disabledTextareas = Array.from(textareas).every((textarea) => textarea.disabled);
+    const emptyTextareas = Array.from(textareas).some((textarea) => textarea.value === '');
 
     if (!disabledTextareas || emptyTextareas)
       return alert('Todos os campos devem ser preenchidos e finalizados.');
@@ -81,9 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const handleInitButton = (event) => {
     const { name, value } = event.target;
 
-    const disabledTextareas = Array.from(textareas).every(
-      (textarea) => textarea.disabled,
-    );
+    const disabledTextareas = Array.from(textareas).every((textarea) => textarea.disabled);
 
     if (!disabledTextareas)
       return alert('Finalize o último campo preenchido para iniciar o próximo');
@@ -97,26 +95,39 @@ document.addEventListener('DOMContentLoaded', function () {
     keyData = {
       ...keyData,
       [`${name}-${value}`]: {
-        init: performance.now(),
+        init: event.timeStamp,
         keys: {},
         pressed: [],
       },
     };
   };
 
-  const handleEndButton = ({ target }) => {
-    const { name, value } = target;
+  const handleEndButton = (event) => {
+    const { name, value } = event.target;
 
     const textarea = document.querySelector(`#${name}-${value}`);
     if (textarea.value === '')
-      return alert(
-        'Preencha a frase correta antes de finalizar o campo selecionado',
-      );
-    target.disabled = true;
+      return alert('Preencha a frase correta antes de finalizar o campo selecionado');
+    event.target.disabled = true;
     textarea.disabled = true;
 
-    keyData[`${name}-${value}`].end = performance.now();
+    keyData[`${name}-${value}`].end = event.timeStamp;
     keyData[`${name}-${value}`].content = textarea.value;
+
+    console.log(keyData[`${name}-${value}`]);
+
+    const jsonString = JSON.stringify(keyData[`${name}-${value}`]);
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      try {
+        navigator.clipboard.writeText(jsonString);
+        console.log('Object copied to clipboard successfully!');
+      } catch (err) {
+        console.error('Unable to copy object to clipboard', err);
+      }
+    } else {
+      console.warn('Clipboard API not supported in this environment.');
+    }
   };
 
   form.addEventListener('submit', handleSubmit);
