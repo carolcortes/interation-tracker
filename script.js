@@ -38,8 +38,6 @@ document.addEventListener('DOMContentLoaded', function () {
   
     const sequence = Object.keys(keyData[name].keys).length;
   
-    console.log('down', event);
-  
     // Verificar se a tecla anterior não tem um release
     const previousSequence = sequence - 1;
     if (previousSequence >= 0 && !keyData[name].keys[previousSequence].release) {
@@ -54,8 +52,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const { name } = event.target;
   
     const sequence = Object.keys(keyData[name].keys).length - 1;
-  
-    console.log('up', event);
   
     keyData[name].keys[sequence].release = event.timeStamp;
   };
@@ -113,21 +109,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     keyData[`${name}-${value}`].end = event.timeStamp;
     keyData[`${name}-${value}`].content = textarea.value;
-
-    console.log(keyData[`${name}-${value}`]);
-
-    const jsonString = JSON.stringify(keyData[`${name}-${value}`]);
-
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      try {
-        navigator.clipboard.writeText(jsonString);
-        console.log('Object copied to clipboard successfully!');
-      } catch (err) {
-        console.error('Unable to copy object to clipboard', err);
-      }
-    } else {
-      console.warn('Clipboard API not supported in this environment.');
-    }
   };
 
   form.addEventListener('submit', handleSubmit);
